@@ -1,0 +1,23 @@
+# .NET Core
+**/bin/
+**/obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# User-specific files
+*.dbmdl
+*.bak
+*.log
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
