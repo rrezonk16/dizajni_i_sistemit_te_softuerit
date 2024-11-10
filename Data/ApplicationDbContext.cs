@@ -8,5 +8,7 @@ namespace dizajni_i_sistemit_softuerik.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
+
     }
 }
