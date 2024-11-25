@@ -9,5 +9,8 @@ namespace dizajni_i_sistemit_softuerik.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+
+        public DbSet<Client> Clients { get; set; }
+
     }
 }
