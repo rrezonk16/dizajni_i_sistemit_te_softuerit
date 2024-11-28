@@ -43,7 +43,7 @@ namespace dizajni_i_sistemit_softuerik.Repositories
         public IEnumerable<Payment> GetByDateRange(DateTime startDate, DateTime endDate)
         {
             return _context.Payments
-                        .Where(p => p.DateCreated >= startDate && p.DateCreated <= endDate)
+                        .Where(p => p.CreatedAt >= startDate && p.CreatedAt <= endDate)
                         .ToList();
         }
 

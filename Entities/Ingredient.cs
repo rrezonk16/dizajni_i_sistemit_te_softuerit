@@ -1,11 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dizajni_i_sistemit_softuerik.Entities
 {
-    public class Ingredient
+    public class Ingredient : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public int Unit { get; set; }
