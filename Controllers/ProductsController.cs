@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using dizajni_i_sistemit_softuerik.Entities;
 using dizajni_i_sistemit_softuerik.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dizajni_i_sistemit_softuerik.Controllers
 {
@@ -25,6 +26,7 @@ namespace dizajni_i_sistemit_softuerik.Controllers
             return product != null ? Ok(product) : NotFound();
         }
 
+        [Authorize]  
         [HttpPost]
         public ActionResult Create([FromBody] Product product)
         {
@@ -32,6 +34,7 @@ namespace dizajni_i_sistemit_softuerik.Controllers
             return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
         }
 
+        [Authorize] 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] Product product)
         {
@@ -40,6 +43,7 @@ namespace dizajni_i_sistemit_softuerik.Controllers
             return NoContent();
         }
 
+        [Authorize]  
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
