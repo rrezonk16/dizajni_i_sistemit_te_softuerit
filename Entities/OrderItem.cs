@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dizajni_i_sistemit_softuerik.Entities
 {
-    public class OrderItem
+    public class OrderItem : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public int OrderId { get; set; }
         [ForeignKey("OrderId")]
