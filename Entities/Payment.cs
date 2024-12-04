@@ -1,11 +1,8 @@
-using System.ComponentModel.DataAnnotations;
 
 namespace dizajni_i_sistemit_softuerik.Entities
 {
-    public class Payment
+    public class Payment : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         public int ClientId { get; set; }
         public int? OrderId { get; set; }
         public double Amount { get; set; }
@@ -17,7 +14,6 @@ namespace dizajni_i_sistemit_softuerik.Entities
 
         // public Order Order { get; set; } 
         public Client Client { get; set; }
-        public DateTime DateCreated { get; set; }
         
     }
 }

@@ -14,5 +14,8 @@ namespace dizajni_i_sistemit_softuerik.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<User> Users { get; set; }
+
+
     }
 }
