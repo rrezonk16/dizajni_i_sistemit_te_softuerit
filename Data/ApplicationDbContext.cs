@@ -15,7 +15,6 @@ namespace dizajni_i_sistemit_softuerik.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<User> Users { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
