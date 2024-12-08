@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dizajni_i_sistemit_softuerik.Data;
 
@@ -11,9 +12,11 @@ using dizajni_i_sistemit_softuerik.Data;
 namespace dizajni_i_sistemit_softuerik.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241208142150_AddNewEntities")]
+    partial class AddNewEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,18 +201,10 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ingredients")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsCarbonated")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MealType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -218,18 +213,13 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("StockQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Temperature")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("Volume")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Product");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Reservation", b =>
@@ -296,6 +286,45 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Beverage", b =>
+                {
+                    b.HasBaseType("dizajni_i_sistemit_softuerik.Entities.Product");
+
+                    b.Property<bool>("IsCarbonated")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Temperature")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Volume")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasDiscriminator().HasValue("Beverage");
+                });
+
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Meal", b =>
+                {
+                    b.HasBaseType("dizajni_i_sistemit_softuerik.Entities.Product");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ingredients")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MealType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Meal");
                 });
 
             modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Order", b =>
