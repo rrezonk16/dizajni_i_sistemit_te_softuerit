@@ -11,7 +11,5 @@ namespace dizajni_i_sistemit_softuerik.Entities
         public string Currency { get; set; }
         public double DiscountApplied { get; set; } 
         public string Status { get; set; }
-        public Order Order { get; set; } 
-        public Client Client { get; set; }
     }
 }
