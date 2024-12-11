@@ -44,5 +44,10 @@ namespace dizajni_i_sistemit_softuerik.Services
 
             return user;
         }
+
+        public async Task<User> GetUserByIdAsync(int userId)
+        {
+            return await _userRepository.GetUserByIdAsync(userId);
+        }
     }
 }

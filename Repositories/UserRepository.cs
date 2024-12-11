@@ -25,5 +25,10 @@ namespace dizajni_i_sistemit_softuerik.Repositories
             await _context.SaveChangesAsync();
             return user;
         }
+
+        public async Task<User> GetUserByIdAsync(int userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        }
     }
 }
