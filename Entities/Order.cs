@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc;
 
 namespace dizajni_i_sistemit_softuerik.Entities
 {
@@ -7,8 +7,9 @@ namespace dizajni_i_sistemit_softuerik.Entities
     {
         public int ClientId { get; set;}
 
+        public int PaymentId { get; set;}     
+        
         [Precision(18, 2)]
         public decimal TotalAmount { get; set; }
-        public Client Client { get; set; }
     }
 }
