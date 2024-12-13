@@ -18,11 +18,11 @@ namespace dizajni_i_sistemit_softuerik.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Order>()
-                .HasOne(o => o.Payment)
-                .WithOne(p => p.Order)
-                .HasForeignKey<Order>(o => o.PaymentId)
-                .OnDelete(DeleteBehavior.NoAction);
+            // modelBuilder.Entity<Order>()
+            //     .HasOne(o => o.Payment)
+            //     .WithOne(p => p.Order)
+            //     .HasForeignKey<Order>(o => o.PaymentId)
+            //     .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(modelBuilder);
         }
