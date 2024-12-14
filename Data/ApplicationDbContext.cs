@@ -17,11 +17,20 @@ namespace dizajni_i_sistemit_softuerik.Data
         public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+<<<<<<< HEAD
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Payment)          
                 .WithOne(p => p.Order)           
                 .HasForeignKey<Order>(o => o.PaymentId) 
                 .OnDelete(DeleteBehavior.NoAction); 
+=======
+
+            // modelBuilder.Entity<Order>()
+            //     .HasOne(o => o.Payment)
+            //     .WithOne(p => p.Order)
+            //     .HasForeignKey<Order>(o => o.PaymentId)
+            //     .OnDelete(DeleteBehavior.NoAction);
+>>>>>>> 0818d28faaf7311aad42fe8ed77d9543e7fa5603
 
             base.OnModelCreating(modelBuilder);
         }
