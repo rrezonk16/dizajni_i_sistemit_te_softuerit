@@ -34,6 +34,17 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost3000", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000") // Allow only localhost:3000
+               .AllowAnyHeader()                    // Allow any headers
+               .AllowAnyMethod();                   // Allow any HTTP methods
+    });
+});
+
 // Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
@@ -77,8 +88,9 @@ if (app.Environment.IsDevelopment())
 
 // Middleware configuration
 app.UseHttpsRedirection();
-app.UseAuthentication(); // Add authentication middleware here
-app.UseAuthorization();
+
+// Add CORS middleware
+app.UseCors("AllowLocalhost3000");
 
 app.MapControllers();
 

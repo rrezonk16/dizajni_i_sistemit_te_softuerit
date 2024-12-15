@@ -30,7 +30,8 @@ namespace dizajni_i_sistemit_softuerik.Services
                 Email = email,
                 PasswordHash = passwordHash,
                 PhoneNumber = phoneNumber,
-                Address = address
+                Address = address,
+                RoleId = 3
             };
 
             return await _userRepository.RegisterUserAsync(user);
