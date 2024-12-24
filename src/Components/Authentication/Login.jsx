@@ -20,6 +20,23 @@ const navigate = useNavigate()
 
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
+        const permissions = [
+          "READ_USERS",
+          "EDIT_USERS",
+          "DELETE_USERS",
+          "CREATE_USERS",
+          "READ_PRODUCTS",
+          "EDIT_PRODUCTS",
+          "DELETE_PRODUCTS",
+          "CREATE_PRODUCTS",
+          "READ_ORDERS",
+          "EDIT_ORDERS",
+          "DELETE_ORDERS",
+          "CREATE_ORDERS"
+      ];
+      
+      localStorage.setItem('permissions', JSON.stringify(permissions));
+      
         setError(''); 
         alert('Login successful!');
         navigate("/")

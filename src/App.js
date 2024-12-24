@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Main from "./Components/Main";
 import Login from "./Components/Authentication/Login";
 import Register from "./Components/Authentication/Register";
+import ProductList from "./Components/Products/ProductList";
+import Error404 from "./Components/ErrorPages/404";
+import Panel from "./Components/Admin/Panel";
 
 
 const routes = [
@@ -13,10 +16,21 @@ const routes = [
     path: "/login",
     element: <Login/>
   },
-  
+  {
+    path: "/products",
+    element: <ProductList/>
+  },
   {
     path: "/register",
     element: <Register/>
+  },
+  {
+    path: "/admin",
+    element: <Panel/>
+  },
+  {
+    path: "/*",
+    element: <Error404/>
   },
 ];
 function App() {
