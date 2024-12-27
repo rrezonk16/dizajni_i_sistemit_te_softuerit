@@ -1,6 +1,6 @@
 import React from "react";
 import { useClientContext } from "../Contexts/ClientContext";
-import { Link } from "react-router-dom"; // Importo Link për navigim
+import { Link } from "react-router-dom"; 
 import moment from "moment-timezone";
 
 const TableRow = ({ client, deleteClient }) => {
@@ -16,9 +16,9 @@ const TableRow = ({ client, deleteClient }) => {
       <td className="py-3 px-4 border-b text-gray-700">{client.phoneNumber}</td>
       <td className="py-3 px-4 border-b text-gray-700">{localCreatedAt}</td>
       <td className="py-3 px-4 border-b">
-        {/* Përdorni Link për navigim në EditClient me clientId */}
+
         <Link
-          to={`/clients/edit/${client.id}`} // Kjo është rruga për të redaktuar klientin
+          to={`/clients/edit/${client.id}`} 
           className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-transform transform hover:scale-105 mr-2"
         >
           Edit

@@ -19,7 +19,7 @@ const routes = [
   { path: '/register', element: <Register /> },
   { path: '/clients', element: <ClientList /> },
   { path: '/create-client', element: <CreateClient /> },
-  { path: '/clients/edit/:clientId', element: <EditClient /> }, // Rruga për EditClient
+  { path: '/clients/edit/:clientId', element: <EditClient /> }, 
 ];
 
 function App() {
