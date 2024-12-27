@@ -3,8 +3,10 @@ import { isLoggedIn } from '../Functions/isLoggedIn';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navigation/Navbar';
 
-const Main = () => {
-  const navigate = useNavigate();
+
+
+  const Main = () => {
+    const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -19,4 +21,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+  export default Main
