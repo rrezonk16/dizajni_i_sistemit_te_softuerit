@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\dizajni_i_sistemit_softuerik.props" />
+</Project>

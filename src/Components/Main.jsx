@@ -1,22 +1,19 @@
-  import React from 'react'
-  import { isLoggedIn } from '../Functions/isLoggedIn';
+import React from 'react';
+import { isLoggedIn } from '../Functions/isLoggedIn';
 import { useNavigate } from 'react-router-dom';
-import Navbar from './Navigation/Navbar';
 
+const Main = () => {
+  const navigate = useNavigate();
 
-  
-  const Main = () => {
-    const navigate = useNavigate();
-
-    if (!isLoggedIn()) {
-      navigate('/login'); 
-    }
-  
-    return (
-      <div className='bg-slate-400'>
-        <Navbar/>
-      </div>
-    )
+  if (!isLoggedIn()) {
+    navigate('/login'); 
   }
 
-  export default Main
+  return (
+    <div className='bg-slate-400'>
+      <h1 className="text-center text-2xl font-bold">Welcome to the Main Page</h1>
+    </div>
+  );
+}
+
+export default Main;
