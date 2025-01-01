@@ -18,6 +18,11 @@ namespace dizajni_i_sistemit_softuerik.Repositories
 
         public Payment GetById(int id) => _context.Payments.Find(id);
 
+        public Payment GetByOrderId(int orderId)
+        {
+            return _context.Payments.FirstOrDefault(o => o.OrderId == orderId);
+        }
+
         public void Add(Payment payment)
         {
             _context.Payments.Add(payment);
@@ -40,7 +45,7 @@ namespace dizajni_i_sistemit_softuerik.Repositories
             }
         }
 
-        public IEnumerable<Payment> GetByDateRange(DateTime startDate, DateTime endDate)
+        public IEnumerable<Payment> GetByDateRange(DateOnly startDate, DateOnly endDate)
         {
             return _context.Payments
                         .Where(p => p.CreatedAt >= startDate && p.CreatedAt <= endDate)
@@ -67,7 +72,7 @@ namespace dizajni_i_sistemit_softuerik.Repositories
             .Where(p => p.ClientId == clientId)
             .ToList();
         }
-        public double GetTotalRevenue()
+        public decimal GetTotalRevenue()
         {
             return _context.Payments.Sum(p => p.Amount);
         }

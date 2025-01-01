@@ -15,6 +15,7 @@ namespace dizajni_i_sistemit_softuerik.Services
         }
 
         public IEnumerable<Order> GetAll() => _orderRepository.GetAll();
+        public IEnumerable<Order> GetByDateRange(DateOnly startDate, DateOnly endDate) => _orderRepository.GetByDateRange(startDate, endDate);
         public Order GetById(int id) => _orderRepository.GetById(id);
         public void Create(Order order) => _orderRepository.Add(order);
         public void Update(Order order) => _orderRepository.Update(order); 

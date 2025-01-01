@@ -6,13 +6,14 @@ namespace dizajni_i_sistemit_softuerik.Repositories
     {
         Payment GetById(int id);
         IEnumerable<Payment> GetByDateRange(
-            DateTime startDate,
-            DateTime endDate
+            DateOnly startDate,
+            DateOnly endDate
         );
         IEnumerable<Payment> GetByStatus(string status);
         IEnumerable<Payment> GetByPaymentMethod(string paymentMethod);
         IEnumerable<Payment> GetByClientId(int clientId);
-        double GetTotalRevenue();
+        Payment GetByOrderId(int orderId);
+        decimal GetTotalRevenue();
         void Add(Payment Payment);
         void Update(Payment Payment);
         void Delete(int id);

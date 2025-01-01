@@ -23,7 +23,7 @@ namespace dizajni_i_sistemit_softuerik.Repositories
         {
             return _context.Orders.FirstOrDefault(o => o.Id == id);
         }
-
+        
         public void Add(Order order)
         {
             _context.Orders.Add(order);
@@ -44,6 +44,14 @@ namespace dizajni_i_sistemit_softuerik.Repositories
                 _context.Orders.Remove(order);
                 _context.SaveChanges();
             }
+        }
+
+
+        public IEnumerable<Order> GetByDateRange(DateOnly startDate, DateOnly endDate)
+        {
+            return _context.Orders
+                        .Where(p => p.CreatedAt >= startDate && p.CreatedAt <= endDate)
+                        .ToList();
         }
     }
 }

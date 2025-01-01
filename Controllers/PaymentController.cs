@@ -16,8 +16,8 @@ namespace dizajni_i_sistemit_softuerik.Controllers
         }
 
         [HttpGet("ByDateRange")]
-        public ActionResult<IEnumerable<Payment>> GetByDateRange(DateTime startDate,
-            DateTime endDate) => Ok(_paymentService.GetByDateRange(startDate, endDate));
+        public ActionResult<IEnumerable<Payment>> GetByDateRange(DateOnly startDate,
+            DateOnly endDate) => Ok(_paymentService.GetByDateRange(startDate, endDate));
 
         [HttpGet("ByStatus")]
         public ActionResult<IEnumerable<Payment>> GetByStatus(string status) => Ok(_paymentService.GetByStatus(status));
@@ -36,7 +36,7 @@ namespace dizajni_i_sistemit_softuerik.Controllers
         }
 
         [HttpGet("TotalRevenue")]
-        public double GetTotalRevenue()
+        public decimal GetTotalRevenue()
         {
             var revenue = _paymentService.GetTotalRevenue();
             return revenue;
