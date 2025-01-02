@@ -1,7 +1,9 @@
-using dizajni_i_sistemit_softuerik.Data;
-using dizajni_i_sistemit_softuerik.Entities;
-using dizajni_i_sistemit_softuerik.Repositories;
-using dizajni_i_sistemit_softuerik.Services;
+using dizajni_i_sistemit_softuerik.Database;
+using dizajni_i_sistemit_softuerik.Domain.Entities;
+using dizajni_i_sistemit_softuerik.Repositories.Interfaces;
+using dizajni_i_sistemit_softuerik.Repositories.Implementations;
+using dizajni_i_sistemit_softuerik.Services.Interfaces;
+using dizajni_i_sistemit_softuerik.Services.Implementations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

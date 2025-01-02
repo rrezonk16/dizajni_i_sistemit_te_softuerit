@@ -1,0 +1,36 @@
+﻿using dizajni_i_sistemit_softuerik.Database;
+using dizajni_i_sistemit_softuerik.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using dizajni_i_sistemit_softuerik.Repositories.Interfaces;
+
+
+namespace dizajni_i_sistemit_softuerik.Repositories.Implementations
+{
+    public class UserRepository : IUserRepository
+    {
+        private readonly ApplicationDbContext _context;
+
+        public UserRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<User> RegisterUserAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
+
+        public async Task<User> GetUserByIdAsync(int userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        }
+    }
+}
