@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using dizajni_i_sistemit_softuerik.DTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using dizajni_i_sistemit_softuerik.Repositories;
 
 namespace dizajni_i_sistemit_softuerik.Controllers
 {
@@ -13,12 +15,18 @@ namespace dizajni_i_sistemit_softuerik.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly ITokenService _tokenService; // Service for generating JWT tokens.
-
-        public AuthController(IUserService userService, ITokenService tokenService)
+        private readonly ITokenService _tokenService;
+        private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
+        private readonly IPermissionRepository _permissionRepository;
+        public AuthController(IUserService userService, ITokenService tokenService, IUserRepository userRepository, IRoleRepository roleRepository, IPermissionRepository permissionRepository)
         {
             _userService = userService;
             _tokenService = tokenService;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
+            _permissionRepository = permissionRepository;
+
         }
 
         [HttpPost("register")]
@@ -50,6 +58,9 @@ namespace dizajni_i_sistemit_softuerik.Controllers
                 return Unauthorized(new { message = ex.Message });
             }
         }
+
+
+      
 
         [HttpGet("me")]
         public async Task<IActionResult> GetUserFromToken()

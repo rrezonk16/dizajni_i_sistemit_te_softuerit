@@ -4,7 +4,6 @@
     {
         public string PermissionName { get; set; }
 
-        // Navigation property for RolePermission
-        public ICollection<RolePermission> RolePermissions { get; set; }
+      public ICollection<RolePermission> RolePermissions { get; set; }
     }
 }

@@ -30,5 +30,18 @@ namespace dizajni_i_sistemit_softuerik.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
+
+
+        public async Task<Role> GetUserRoleAndPermissionsAsync(int userId)
+        {
+            var user = await _context.Users
+                .Include(u => u.Role)
+                .ThenInclude(r => r.RolePermissions)
+                .ThenInclude(rp => rp.Permission)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user?.Role;
+        }
+
     }
 }

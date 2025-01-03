@@ -10,9 +10,8 @@ namespace dizajni_i_sistemit_softuerik.Entities
         public string PasswordHash { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-
-        // Foreign key for Role
         public int RoleId { get; set; }
         public Role Role { get; set; }
     }
 }
+    

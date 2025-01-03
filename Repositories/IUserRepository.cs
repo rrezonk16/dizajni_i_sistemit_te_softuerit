@@ -8,5 +8,8 @@ namespace dizajni_i_sistemit_softuerik.Repositories
         Task<User> GetUserByEmailAsync(string email);
         Task<User> RegisterUserAsync(User user);
         Task<User> GetUserByIdAsync(int userId);
+        Task<Role> GetUserRoleAndPermissionsAsync(int userId);
     }
+
 }
+
