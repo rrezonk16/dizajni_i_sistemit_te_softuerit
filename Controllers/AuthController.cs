@@ -1,12 +1,12 @@
-﻿using dizajni_i_sistemit_softuerik.Entities;
-using dizajni_i_sistemit_softuerik.Services;
+﻿using dizajni_i_sistemit_softuerik.Domain.Entities;
+using dizajni_i_sistemit_softuerik.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using dizajni_i_sistemit_softuerik.DTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using dizajni_i_sistemit_softuerik.Repositories;
+using dizajni_i_sistemit_softuerik.Repositories.Interfaces;
 
 namespace dizajni_i_sistemit_softuerik.Controllers
 {
