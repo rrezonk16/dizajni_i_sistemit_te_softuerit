@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using dizajni_i_sistemit_softuerik.Data;
+using dizajni_i_sistemit_softuerik.Database;
 
 #nullable disable
 

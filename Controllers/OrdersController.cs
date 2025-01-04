@@ -1,5 +1,5 @@
-﻿using dizajni_i_sistemit_softuerik.Entities;
-using dizajni_i_sistemit_softuerik.Services;
+﻿using dizajni_i_sistemit_softuerik.Domain.Entities;
+using dizajni_i_sistemit_softuerik.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dizajni_i_sistemit_softuerik.Controllers

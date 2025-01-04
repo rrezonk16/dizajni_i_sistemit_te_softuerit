@@ -9,7 +9,7 @@ namespace dizajni_i_sistemit_softuerik.Domain.Entities
 
         public int PaymentId { get; set;}     
         
-        [Precision(18, 2)]
+        // [Precision(18, 2)]
         public decimal TotalAmount { get; set; }
     }
 }

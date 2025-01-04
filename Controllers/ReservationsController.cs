@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using dizajni_i_sistemit_softuerik.Entities;
-using dizajni_i_sistemit_softuerik.Services;
+using dizajni_i_sistemit_softuerik.Domain.Entities;
+using dizajni_i_sistemit_softuerik.Services.Interfaces;
 
 namespace dizajni_i_sistemit_softuerik.Controllers
 {
