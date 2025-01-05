@@ -10,31 +10,30 @@ const Footer = () => {
               href="/"
               className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
             >
-            
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                 RMS
               </span>
             </a>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
               <li>
-                <a href="#" className="hover:underline me-4 md:me-6">
+                <button className="hover:underline me-4 md:me-6">
                   About
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:underline me-4 md:me-6">
+                <button className="hover:underline me-4 md:me-6">
                   Privacy Policy
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:underline me-4 md:me-6">
+                <button className="hover:underline me-4 md:me-6">
                   Licensing
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <button className="hover:underline">
                   Contact
-                </a>
+                </button>
               </li>
             </ul>
           </div>

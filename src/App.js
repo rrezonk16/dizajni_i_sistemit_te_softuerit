@@ -3,68 +3,57 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navigation/Navbar';
 import Footer from './Components/Navigation/Footer';
 import { ClientProvider } from './Contexts/ClientContext';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Main from "./Components/Main";
-import Login from "./Components/Authentication/Login";
-import Register from "./Components/Authentication/Register";
+import { ReservationProvider } from './Contexts/ReservationContext';
 import ProductList from "./Components/Products/ProductList";
 import Error404 from "./Components/ErrorPages/404";
 import Panel from "./Components/Admin/Panel";
+import { ToastContainer } from 'react-toastify';  
+import 'react-toastify/dist/ReactToastify.css';  
 
+const ClientList = lazy(() => import('./Components/Clients/ClientList'));
+const CreateClient = lazy(() => import('./Components/Clients/CreateClient'));
+const EditClient = lazy(() => import('./Components/Clients/EditClient'));
+const ReservationList = lazy(() => import('./Components/Reservations/ReservationList'));
+const CreateReservation = lazy(() => import('./Components/Reservations/CreateReservation'));
 const Main = lazy(() => import('./Components/Main'));
 const Login = lazy(() => import('./Components/Authentication/Login'));
 const Register = lazy(() => import('./Components/Authentication/Register'));
-const ClientList = lazy(() => import('./Components/ClientList'));
-const CreateClient = lazy(() => import('./Components/CreateClient'));
-const EditClient = lazy(() => import('./Components/EditClient'));
 
 const routes = [
-  {
-    path: "/",
-    element: <Main/>
-  },
-  {
-    path: "/login",
-    element: <Login/>
-  },
-  {
-    path: "/products",
-    element: <ProductList/>
-  },
-  {
-    path: "/register",
-    element: <Register/>
-  },
-  {
-    path: "/admin",
-    element: <Panel/>
-  },
-  {
-    path: "/*",
-    element: <Error404/>
-  },
-  { path: '/clients', element: <ClientList /> },
-  { path: '/create-client', element: <CreateClient /> },
-  { path: '/clients/edit/:clientId', element: <EditClient /> },
+  { path: "/", element: <Main /> },
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+  { path: "/products", element: <ProductList /> },
+  { path: "/admin", element: <Panel /> },
+  { path: "/clients", element: <ClientList /> },
+  { path: "/create-client", element: <CreateClient /> },
+  { path: "/clients/edit/:clientId", element: <EditClient /> },
+  { path: "/reservations", element: <ReservationList /> },
+  { path: "/create-reservation", element: <CreateReservation /> },
+
+  { path: "*", element: <Error404 /> },
 ];
 
 function App() {
   return (
-    <ClientProvider>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <div className="flex-grow">
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              {routes.map((route, index) => (
-                <Route key={index} path={route.path} element={route.element} />
-              ))}
-            </Routes>
-          </Suspense>
+    <ReservationProvider>
+      <ClientProvider>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <div className="flex-grow">
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                {routes.map((route, index) => (
+                  <Route key={index} path={route.path} element={route.element} />
+                ))}
+              </Routes>
+            </Suspense>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </ClientProvider>
+        <ToastContainer /> 
+      </ClientProvider>
+    </ReservationProvider>
   );
 }
 

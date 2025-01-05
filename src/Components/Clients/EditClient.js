@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getClientById, updateClient } from "../Services/ClientService";
-import { useClientContext } from "../Contexts/ClientContext";
+import { getClientById, updateClient } from "../../Services/ClientService";
+import { useClientContext } from "../../Contexts/ClientContext";
 
 const EditClient = () => {
   const { clientId } = useParams();
