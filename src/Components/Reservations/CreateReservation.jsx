@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import { QRCodeSVG } from 'qrcode.react'; 
 
-const ReservationForm = ({ reservationId, onSuccess }) => {
-  const [isEdit, setIsEdit] = useState(false);
+const CreateReservation = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [qrCodeUrl, setQrCodeUrl] = useState(''); 
+  const navigate = useNavigate();
 
   const schema = Yup.object().shape({
     clientName: Yup.string().required('Emri i klientit është i detyrueshëm'),
@@ -23,45 +26,26 @@ const ReservationForm = ({ reservationId, onSuccess }) => {
     reservationDate: Yup.date().required('Data e rezervimit është e detyrueshme'),
   });
 
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
-
-  useEffect(() => {
-    if (reservationId) {
-      setIsEdit(true);
-      axios.get(`https://localhost:7117/api/reservations/${reservationId}`)
-        .then(response => {
-          const { clientName, clientPhoneNumber, numberOfGuests, reservationDate } = response.data;
-          setValue('clientName', clientName);
-          setValue('clientPhoneNumber', clientPhoneNumber);
-          setValue('numberOfGuests', numberOfGuests);
-          setValue('reservationDate', reservationDate);
-        })
-        .catch(() => {
-          setErrorMessage('Gabim gjatë ngarkimit të rezervimit');
-        });
-    }
-  }, [reservationId, setValue]);
 
   const onSubmit = async (data) => {
     setErrorMessage('');
     setSuccessMessage('');
     try {
-      if (isEdit) {
-        await axios.put(`https://localhost:7117/api/reservations/${reservationId}`, data);
-        toast.success('Rezervimi është përditësuar me sukses'); 
-      } else {
-        await axios.post('https://localhost:7117/api/reservations', data);
-        toast.success('Rezervimi është krijuar me sukses'); 
-      }
-      onSuccess && onSuccess();
+      const response = await axios.post('https://localhost:7117/api/reservations', data);
+      toast.success('Rezervimi është krijuar me sukses');
+
+      setQrCodeUrl(response.data.secretId);
+
+      navigate(`/reservation-success/${response.data.secretId}`);
     } catch (error) {
       console.error('Gabim i plotë:', error.response || error);
       if (error.response && error.response.data) {
-        toast.error(error.response.data.message || 'Gabim gjatë dërgimit të të dhënave'); 
+        toast.error(error.response.data.message || 'Gabim gjatë dërgimit të të dhënave');
       } else {
-        toast.error('Gabim i panjohur ndodhi'); 
+        toast.error('Gabim i panjohur ndodhi');
       }
     }
   };
@@ -74,9 +58,7 @@ const ReservationForm = ({ reservationId, onSuccess }) => {
       }}
     >
       <div className="w-full max-w-2xl p-8 bg-white/90 rounded-lg shadow-xl">
-        <h2 className="text-3xl font-bold mb-8 text-center text-blue-600">
-          {isEdit ? 'Përditëso Rezervimin' : 'Krijo Rezervimin'}
-        </h2>
+        <h2 className="text-3xl font-bold mb-8 text-center text-blue-600">Krijo Rezervimin</h2>
 
         {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
         {successMessage && <div className="text-green-500 mb-4">{successMessage}</div>}
@@ -94,7 +76,6 @@ const ReservationForm = ({ reservationId, onSuccess }) => {
             />
             {errors.clientName && <p className="text-red-500">{errors.clientName.message}</p>}
           </div>
-
           <div className="mb-6">
             <label htmlFor="clientPhoneNumber" className="block text-gray-700 font-medium">Numri i Telefonit</label>
             <input
@@ -107,7 +88,6 @@ const ReservationForm = ({ reservationId, onSuccess }) => {
             />
             {errors.clientPhoneNumber && <p className="text-red-500">{errors.clientPhoneNumber.message}</p>}
           </div>
-
           <div className="mb-6">
             <label htmlFor="numberOfGuests" className="block text-gray-700 font-medium">Numri i Mysafirëve</label>
             <input
@@ -120,7 +100,6 @@ const ReservationForm = ({ reservationId, onSuccess }) => {
             />
             {errors.numberOfGuests && <p className="text-red-500">{errors.numberOfGuests.message}</p>}
           </div>
-
           <div className="mb-6">
             <label htmlFor="reservationDate" className="block text-gray-700 font-medium">Data e Rezervimit</label>
             <input
@@ -132,16 +111,20 @@ const ReservationForm = ({ reservationId, onSuccess }) => {
             />
             {errors.reservationDate && <p className="text-red-500">{errors.reservationDate.message}</p>}
           </div>
-
           <button type="submit" className="w-full bg-blue-600 text-white p-4 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300">
-            {isEdit ? 'Përditëso' : 'Krijo'} Rezervimin
+            Krijo Rezervimin
           </button>
         </form>
+        {qrCodeUrl && (
+          <div className="mt-8 text-center">
+            <QRCodeSVG value={`https://localhost:7117/reservation/${qrCodeUrl}`} size={256} />
+          </div>
+        )}
       </div>
 
-      <ToastContainer /> 
+      <ToastContainer />
     </div>
   );
 };
 
-export default ReservationForm;
+export default CreateReservation;
