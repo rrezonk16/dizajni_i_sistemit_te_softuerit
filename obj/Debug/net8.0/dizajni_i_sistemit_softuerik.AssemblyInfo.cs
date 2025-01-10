@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dizajni_i_sistemit_softuerik")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2bb1786814e0cc8ca335bbf8fb041eeaede10f0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+06ebd2732810d48730565cb9c554f774a8dba967")]
 [assembly: System.Reflection.AssemblyProductAttribute("dizajni_i_sistemit_softuerik")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dizajni_i_sistemit_softuerik")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

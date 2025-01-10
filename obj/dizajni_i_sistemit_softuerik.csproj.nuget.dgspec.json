@@ -50,10 +50,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Azure.Identity": {
-              "target": "Package",
-              "version": "[1.13.1, )"
-            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -72,14 +68,6 @@
               "target": "Package",
               "version": "[8.0.8, )"
             },
-            "Microsoft.Extensions.Caching.Memory": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.Identity.Client": {
-              "target": "Package",
-              "version": "[4.66.2, )"
-            },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -91,14 +79,6 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.6, )"
-            },
-            "System.Formats.Asn1": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "System.Text.Json": {
-              "target": "Package",
-              "version": "[9.0.0, )"
             }
           },
           "imports": [
