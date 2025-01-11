@@ -36,10 +36,8 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
-
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
@@ -67,13 +65,24 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddAuthorization();
+
 // Add Swagger support for API documentation
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost3000", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
-app.UseAuthentication();  // Authentication middleware
-app.UseAuthorization();   // Authorization middleware
 
 // Enable Swagger UI only in development
 if (app.Environment.IsDevelopment())
@@ -84,9 +93,11 @@ if (app.Environment.IsDevelopment())
 
 // Middleware configuration
 app.UseHttpsRedirection();
-app.UseAuthentication(); // Add authentication middleware here
+app.UseCors("AllowLocalhost3000"); // Vendosni këtu
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+

@@ -4,10 +4,11 @@ using dizajni_i_sistemit_softuerik.Domain.Entities;
 
 namespace dizajni_i_sistemit_softuerik.Repositories.Interfaces
 {
-    public interface IReservationRepository 
+    public interface IReservationRepository
     {
         Task<IEnumerable<Reservation>> GetAllAsync();
         Task<Reservation> GetByIdAsync(int id);
+        Task<Reservation> GetBySecretIdAsync(string secretId);
         Task CreateAsync(Reservation reservation);
         Task UpdateAsync(Reservation reservation);
         Task DeleteAsync(int id);
