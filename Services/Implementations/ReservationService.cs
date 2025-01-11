@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using dizajni_i_sistemit_softuerik.Domain.Entities;
+using dizajni_i_sistemit_softuerik.Repositories;
 using dizajni_i_sistemit_softuerik.Repositories.Interfaces;
 using dizajni_i_sistemit_softuerik.Services.Interfaces;
-
 namespace dizajni_i_sistemit_softuerik.Services.Implementations
 {
     public class ReservationService : IReservationService
@@ -23,6 +23,11 @@ namespace dizajni_i_sistemit_softuerik.Services.Implementations
         public async Task<Reservation> GetByIdAsync(int id)
         {
             return await _reservationRepository.GetByIdAsync(id);
+        }
+
+        public async Task<Reservation> GetBySecretIdAsync(string secretId)
+        {
+            return await _reservationRepository.GetBySecretIdAsync(secretId);
         }
 
         public async Task CreateAsync(Reservation reservation)

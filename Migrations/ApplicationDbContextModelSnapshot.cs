@@ -22,7 +22,7 @@ namespace dizajni_i_sistemit_softuerik.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Client", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Ingredient", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Ingredient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,7 +83,7 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.ToTable("Ingredients");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Order", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,20 +101,14 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("PaymentId")
-                        .IsUnique();
-
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.OrderItem", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +140,7 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Payment", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Payment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -183,12 +177,80 @@ namespace dizajni_i_sistemit_softuerik.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Product", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Permission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PermissionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8854),
+                            PermissionName = "READ_USERS"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8856),
+                            PermissionName = "EDIT_USERS"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8857),
+                            PermissionName = "DELETE_USERS"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8858),
+                            PermissionName = "CREATE_USERS"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8859),
+                            PermissionName = "READ_ORDERS"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8860),
+                            PermissionName = "EDIT_ORDERS"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8861),
+                            PermissionName = "DELETE_ORDERS"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8862),
+                            PermissionName = "CREATE_ORDERS"
+                        });
+                });
+
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,7 +296,7 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Reservation", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -242,8 +304,13 @@ namespace dizajni_i_sistemit_softuerik.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClientPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -251,19 +318,115 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.Property<int>("NumberOfGuests")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
+                    b.Property<DateTime>("ReservationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecretId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TableId")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.User", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8750),
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8752),
+                            Name = "Delivery"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 1, 7, 20, 8, 51, 413, DateTimeKind.Utc).AddTicks(8753),
+                            Name = "Guest"
+                        });
+                });
+
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.RolePermission", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoleId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("RolePermissions");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 2
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 3
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 4
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            PermissionId = 5
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            PermissionId = 6
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            PermissionId = 1
+                        });
+                });
+
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -274,6 +437,9 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -291,43 +457,29 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Order", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.OrderItem", b =>
                 {
-                    b.HasOne("dizajni_i_sistemit_softuerik.Entities.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("dizajni_i_sistemit_softuerik.Entities.Payment", "Payment")
-                        .WithOne("Order")
-                        .HasForeignKey("dizajni_i_sistemit_softuerik.Entities.Order", "PaymentId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Payment");
-                });
-
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.OrderItem", b =>
-                {
-                    b.HasOne("dizajni_i_sistemit_softuerik.Entities.Order", "Order")
+                    b.HasOne("dizajni_i_sistemit_softuerik.Domain.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("dizajni_i_sistemit_softuerik.Entities.Product", "Product")
+                    b.HasOne("dizajni_i_sistemit_softuerik.Domain.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -338,21 +490,46 @@ namespace dizajni_i_sistemit_softuerik.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Payment", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.RolePermission", b =>
                 {
-                    b.HasOne("dizajni_i_sistemit_softuerik.Entities.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
+                    b.HasOne("dizajni_i_sistemit_softuerik.Domain.Entities.Permission", "Permission")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.HasOne("dizajni_i_sistemit_softuerik.Domain.Entities.Role", "Role")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Entities.Payment", b =>
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Order")
+                    b.HasOne("dizajni_i_sistemit_softuerik.Domain.Entities.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Permission", b =>
+                {
+                    b.Navigation("RolePermissions");
+                });
+
+            modelBuilder.Entity("dizajni_i_sistemit_softuerik.Domain.Entities.Role", b =>
+                {
+                    b.Navigation("RolePermissions");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
