@@ -16,7 +16,7 @@ namespace dizajni_i_sistemit_softuerik.Domain.Entities
         public Product Product { get; set; }
 
         [Required]
-        public int Quantity { get; set; }
+        public int Quantity { get; set; }    //sna vyn
 
         [Required]
         public decimal Price { get; set; }
