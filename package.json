@@ -48,7 +48,12 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "tailwindcss": "^3.4.14"
+    "tailwindcss": "^3.4.17"
   },
-  "proxy": "https://localhost:7117"
+  "proxy": "https://localhost:7117",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

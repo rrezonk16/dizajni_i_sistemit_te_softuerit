@@ -10,6 +10,7 @@ import Panel from "./Components/Admin/Panel";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Lazy load components
 const ClientList = lazy(() => import('./Components/Clients/ClientList'));
 const CreateClient = lazy(() => import('./Components/Clients/CreateClient'));
 const EditClient = lazy(() => import('./Components/Clients/EditClient'));
@@ -32,7 +33,7 @@ const routes = [
   { path: "/clients/edit/:clientId", element: <EditClient /> },
   { path: "/reservations", element: <ReservationList /> },
   { path: "/create-reservation", element: <CreateReservation /> },
-  { path: "/reservation-success/:secretId", element: <ReservationSuccess /> }, 
+  { path: "/reservation-success/:secretId", element: <ReservationSuccess /> },
   { path: "/reservation-details/:secretId", element: <ReservationDetails /> },
   { path: "*", element: <Error404 /> }
 ];
