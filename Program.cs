@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,9 +75,10 @@ builder.Services.AddSwaggerGen();
 // Add CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost3000", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        // Allow requests from specific origins
+        policy.WithOrigins("http://localhost:3000", "http://192.168.100.125") // Add more IPs if needed
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -93,11 +95,10 @@ if (app.Environment.IsDevelopment())
 
 // Middleware configuration
 app.UseHttpsRedirection();
-app.UseCors("AllowLocalhost3000"); // Vendosni këtu
+app.UseCors("AllowAll"); // Apply CORS policy
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-

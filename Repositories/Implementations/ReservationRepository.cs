@@ -33,6 +33,8 @@ namespace dizajni_i_sistemit_softuerik.Repositories.Implementations
 
         public async Task CreateAsync(Reservation reservation)
         {
+            reservation.Status = "Pending";
+            reservation.SecretId = Guid.NewGuid().ToString();
             await _context.Reservations.AddAsync(reservation);
             await _context.SaveChangesAsync();
         }

@@ -64,17 +64,20 @@ namespace dizajni_i_sistemit_softuerik.Controllers
         public async Task<IActionResult> GetReservationDetails(string secretId)
         {
             var reservation = await _reservationService.GetBySecretIdAsync(secretId);
+
             if (reservation == null)
             {
                 return NotFound(new { message = "Reservation not found" });
             }
+
+            var reservationDate = reservation.ReservationDate.ToString("yyyy-MM-dd HH:mm:ss");
 
             return Ok(new
             {
                 reservation.ClientName,
                 reservation.ClientPhoneNumber,
                 reservation.NumberOfGuests,
-                reservation.ReservationDate,
+                ReservationDate = reservationDate,
                 Status = reservation.Status.ToString()
             });
         }
@@ -90,7 +93,7 @@ namespace dizajni_i_sistemit_softuerik.Controllers
             reservation.SecretId = Guid.NewGuid().ToString();
             await _reservationService.CreateAsync(reservation);
 
-            var reservationUrl = $"https://localhost:7117/reservation/{reservation.SecretId}";
+            var reservationUrl = $"http://95.86.58.117/reservation/{reservation.SecretId}";
 
             return CreatedAtAction(nameof(GetReservationDetails), new { secretId = reservation.SecretId }, new
             {
